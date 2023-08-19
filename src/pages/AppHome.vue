@@ -20,7 +20,6 @@
 
     <v-main>
       <v-container fluid>
-        <!-- -->
       </v-container>
     </v-main>
 
@@ -28,8 +27,8 @@
 </template>
 
 <script>
-import Assessments from '@/components/AppHome/Assessments'
-import NewAssessmentModal from '@/components/AppHome/NewAssessmentModal'
+import Assessments from '@/components/Assessments'
+import NewAssessmentModal from '@/components/NewAssessmentModal'
 
 export default {
   name: 'AppHome',

@@ -22,8 +22,6 @@
       </v-card-title>
       <v-card-text>
         <v-text-field
-          v-model="name"
-          :rules="nameRules"
           label="Digite o tema que deseja"
           required
         ></v-text-field>
