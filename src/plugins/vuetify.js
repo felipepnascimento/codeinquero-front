@@ -8,12 +8,13 @@ Vue.use(Vuetify)
 
 const opts = {
   theme: {
-    dark: true,
     themes: {
-      dark: {
+      light: {
         primary: '#0D3854',
         success: '#2FB05B',
-        error: '#E64A5D'
+        error: '#E64A5D',
+        purple: '#6E1598',
+        gray: '#808080'
       }
     }
   }

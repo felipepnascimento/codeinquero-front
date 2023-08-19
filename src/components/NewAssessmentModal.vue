@@ -9,6 +9,7 @@
         outlined
         v-bind="attrs"
         v-on="on"
+        dark
         >
         <v-icon left>
           mdi-plus

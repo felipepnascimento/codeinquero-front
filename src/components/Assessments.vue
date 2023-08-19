@@ -2,6 +2,7 @@
   <v-list
     dense
     nav
+    dark
   >
     <v-list-item-title class="text-h7">
       Suas Provas
