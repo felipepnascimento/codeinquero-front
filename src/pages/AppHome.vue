@@ -12,7 +12,10 @@
       <Assessments />
     </v-navigation-drawer>
 
-    <v-app-bar app color="primary">
+    <v-app-bar app dark color="primary">
+      <v-toolbar-title >
+        Prova de Matemática Aplicada
+      </v-toolbar-title>
       <v-spacer></v-spacer>
 
       <NewAssessmentModal />
