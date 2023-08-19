@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer app color="primary">
-      <v-list-item>
+      <v-list-item dark>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
             Study Bro
@@ -12,7 +12,7 @@
       <Assessments />
     </v-navigation-drawer>
 
-    <v-app-bar app color="primary ">
+    <v-app-bar app color="primary">
       <v-spacer></v-spacer>
 
       <NewAssessmentModal />
@@ -20,6 +20,7 @@
 
     <v-main>
       <v-container fluid>
+        <Questions />
       </v-container>
     </v-main>
 
@@ -29,12 +30,14 @@
 <script>
 import Assessments from '@/components/Assessments'
 import NewAssessmentModal from '@/components/NewAssessmentModal'
+import Questions from '@/components/Questions/Questions'
 
 export default {
   name: 'AppHome',
   components: {
     Assessments,
-    NewAssessmentModal
+    NewAssessmentModal,
+    Questions
   },
   data () {
     return {
