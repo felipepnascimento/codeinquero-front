@@ -96,7 +96,7 @@ export default {
       if (data.correct) {
         this.writeHelperText(`Parabéns, você acertou! Raciocínio: ${data.reasoning}`)
       } else {
-        this.writeHelperText(`Você error. Entenda o raciocínio: \n ${data.reasoning}`)
+        this.writeHelperText(`Você errou. Entenda o raciocínio: \n ${data.reasoning}`)
       }
       this.setLoading(false)
     },
