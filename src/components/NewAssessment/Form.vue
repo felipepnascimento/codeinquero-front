@@ -81,15 +81,18 @@ export default {
     },
     async submit () {
       this.setLoading(true)
-      const { status, data } = await sessionApi.post(this.sessionParams())
-      if (status === 200) {
+      sessionApi.post(this.sessionParams()).then(async ({ data }) => {
         this.clearParams()
         this.closeModal()
         await this.getAllSessions()
         this.setSelectedSession(data.sessionId)
         this.setFinishedSession(false)
-      }
-      this.setLoading(false)
+      }).catch((error) => {
+        console.log(error)
+        window.alert('Ocorreu um erro inesperado')
+      }).finally(() => {
+        this.setLoading(false)
+      })
     },
     sessionParams () {
       return {
