@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     navigate () {
-      this.$router.push('/app')
+      this.$router.push({ path: '/app', query: { start: 'true' } })
     },
     async writeH1Animated (text) {
       const intervalId = setInterval(() => {

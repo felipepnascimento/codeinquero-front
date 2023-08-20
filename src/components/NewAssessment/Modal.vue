@@ -39,6 +39,12 @@ export default {
       this.dialog = false
     }
   },
+  mounted () {
+    const { start } = this.$route.query
+    if (start) {
+      this.dialog = true
+    }
+  },
   data () {
     return {
       dialog: false
