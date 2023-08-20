@@ -9,7 +9,7 @@
     </v-list-item-title>
     <v-list-item
       v-for="session in sessions"
-      :key="session.id"
+      :key="session.sessionId"
       link
       @click="setSelectedSession(session)"
     >
@@ -32,8 +32,11 @@ export default {
   computed: {
     ...mapGetters('session', ['sessions'])
   },
+  mounted () {
+    this.getAllSessions()
+  },
   methods: {
-    ...mapActions('session', ['setSelectedSession'])
+    ...mapActions('session', ['setSelectedSession', 'getAllSessions'])
   }
 }
 </script>
