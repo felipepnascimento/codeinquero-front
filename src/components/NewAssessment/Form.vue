@@ -28,7 +28,7 @@
             v-model="degree"
             :items="degrees"
             :error-messages="errors"
-            label="Selecionae o grau"
+            label="Selecionar o grau"
             solo
             required
           >
@@ -44,7 +44,7 @@
             v-model="level"
             :items="levels"
             :error-messages="errors"
-            label="Selecionae o nível"
+            label="Selecionar o nível"
             solo
           >
           </v-select>
