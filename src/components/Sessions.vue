@@ -11,7 +11,7 @@
       v-for="session in sessions"
       :key="session.id"
       link
-      @click="setSelectedSession(session)"
+      @click="setSelectedSession(session.id)"
     >
       <v-list-item-icon>
         <v-icon>mdi-history</v-icon>

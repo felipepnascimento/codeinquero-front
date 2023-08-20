@@ -66,6 +66,7 @@
 
 <script>
 import sessionApi from '@/api/session'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'NewAssessmentModal',
@@ -75,10 +76,14 @@ export default {
   components: {
   },
   methods: {
+    ...mapActions('session', ['setSelectedSession', 'getAllSessions']),
     async submit () {
-      await sessionApi.post(this.sessionParams())
-      this.clearParams()
-      this.closeModal()
+      sessionApi.post(this.sessionParams()).then(async ({ data }) => {
+        this.clearParams()
+        this.closeModal()
+        await this.getAllSessions()
+        this.setSelectedSession(data.sessionId)
+      })
     },
     sessionParams () {
       return {

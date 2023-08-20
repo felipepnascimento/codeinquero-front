@@ -20,7 +20,8 @@ const mutations = {
 }
 
 const actions = {
-  setSelectedSession ({ commit }, selectedSession) {
+  setSelectedSession ({ state, commit }, id) {
+    const selectedSession = state.sessions.find(session => session.id === id)
     commit('setSelectedSession', selectedSession)
   },
   setSessions ({ commit }, sessions) {
