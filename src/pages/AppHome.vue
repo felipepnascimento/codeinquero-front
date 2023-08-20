@@ -34,6 +34,7 @@
 import Assessments from '@/components/Assessments'
 import NewAssessmentModal from '@/components/NewAssessmentModal'
 import Questions from '@/components/Questions/Questions'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AppHome',
@@ -41,6 +42,9 @@ export default {
     Assessments,
     NewAssessmentModal,
     Questions
+  },
+  computed: {
+    ...mapGetters('assessment', ['assessment'])
   },
   data () {
     return {
