@@ -1,20 +1,16 @@
 <template>
   <div class="questions-wrapper">
     <div>
-      <span class="text-h7">Pergunta 1 de 10</span>
-      <v-progress-linear value="10" color="purple" background-color="grey"></v-progress-linear>
+      <span class="text-h7">{{ selectedQuestion.name }} de 10</span>
+      <v-progress-linear :value="selectedQuestion.value" color="purple" background-color="grey"></v-progress-linear>
     </div>
     <v-expansion-panels>
       <v-expansion-panel
-        v-for="(item,i) in 10"
-        :key="i"
+        v-for="(question, i) in questions"
+        :key="question.name"
+        @click="setSelectedQuestion(question, i)"
       >
-        <v-expansion-panel-header>
-          Pergunta {{  i + 1  }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </v-expansion-panel-content>
+        <Question :question="question" />
       </v-expansion-panel>
     </v-expansion-panels>
   </div>
@@ -22,14 +18,70 @@
 
 <script>
 
+import Question from './Question'
+
 export default {
   name: 'Questions',
   components: {
+    Question
+  },
+  computed: {
+
   },
   methods: {
+    setSelectedQuestion (question, index) {
+      this.selectedQuestion = {
+        name: question.name,
+        value: (index + 1) * 10
+      }
+    }
   },
   data () {
     return {
+      questions: [{
+        name: 'Pergunta 1',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 2',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 3',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 4',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 5',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 6',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 7',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 8',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 9',
+        question: 'Qual é o maior país do mundo?'
+      },
+      {
+        name: 'Pergunta 10',
+        question: 'Qual é o maior país do mundo?'
+      }],
+      selectedQuestion: {
+        name: 'Pergunta 1',
+        value: 10
+      }
     }
   }
 }
@@ -39,5 +91,6 @@ export default {
   display: flex;
   flex-direction: column;
   row-gap: 32px;
+  padding: 0 48px;
 }
 </style>
