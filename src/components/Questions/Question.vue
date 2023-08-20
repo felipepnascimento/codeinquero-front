@@ -1,5 +1,5 @@
 <template>
-  <div class="question-wrapper">
+  <div :class="`question-wrapper ${this.correct && 'correct'}`">
     <v-expansion-panel-header>
       {{  index  }}) {{  question.statement  }}
     </v-expansion-panel-header>
@@ -13,11 +13,11 @@
           @click="setSelectedAlternative(alternative.id)"
         ></v-radio>
       </v-radio-group>
-      <div class="tip-section">
-        {{  activeTipText  }}
+      <div class="helper-section">
+        {{  helperText  }}
       </div>
       <div class="actions-section">
-        <v-btn @click="showTip()">
+        <v-btn outlined @click="showTip()">
           Quero uma dica
         </v-btn>
         <v-btn
@@ -33,7 +33,11 @@
 </template>
 
 <style scoped>
-.tip-section {
+.question-wrapper.correct {
+  background-color: #ceefd0;
+}
+
+.helper-section {
   min-height: 36px;
   margin-bottom: 8px;
 }
@@ -44,6 +48,8 @@
 </style>
 
 <script>
+import questionApi from '@/api/question'
+
 export default {
   name: 'Question',
   props: {
@@ -54,33 +60,41 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    sessionId: {
+      type: String,
+      required: false
     }
   },
   components: {
   },
   methods: {
-    writeActiveTipAnimated (tip) {
+    writeHelperText (tip) {
+      this.helperText = ''
       const words = tip.split(' ')
       words.forEach((word, i) => {
         setTimeout(() => {
-          this.activeTipText = (this.activeTipText || '') + ' ' + word
+          this.helperText = (this.helperText || '') + ' ' + word
         }, i * 150)
       })
     },
     showTip () {
-      console.log('this.activeTipIndex', this.activeTipIndex)
       const activeTipIndex = this.activeTipIndex !== null ? this.activeTipIndex + 1 : 0
-      console.log('activeTipIndex', activeTipIndex)
       if (!this.question.tips[activeTipIndex]) {
-        this.activeTipText = 'Acabaram as dicas.'
+        this.helperText = 'Acabaram as dicas.'
       } else {
-        this.activeTipText = ''
         this.activeTipIndex = activeTipIndex
-        this.writeActiveTipAnimated(this.question.tips[activeTipIndex].description)
+        this.writeHelperText(this.question.tips[activeTipIndex].description)
       }
     },
-    submitAnswer () {
-      console.log('Enviar resposta', this.selectedAlternative)
+    async submitAnswer () {
+      const { data } = await questionApi.submitAnswer(this.sessionId, this.question.id, this.selectedAlternative)
+      this.correct = data.correct
+      if (data.correct) {
+        this.writeHelperText(`Parabéns, você acertou! Raciocínio: ${data.reasoning}`)
+      } else {
+        this.writeHelperText(`Você error. Entenda o raciocínio: \n ${data.reasoning}`)
+      }
     },
     setSelectedAlternative (alternativeId) {
       this.selectedAlternative = alternativeId
@@ -89,8 +103,9 @@ export default {
   data () {
     return {
       activeTipIndex: null,
-      activeTipText: '',
-      selectedAlternative: null
+      helperText: '',
+      selectedAlternative: null,
+      correct: null
     }
   }
 }
