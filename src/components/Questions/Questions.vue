@@ -1,7 +1,7 @@
 <template>
   <div class="questions-wrapper" v-if="this.questions.length > 0">
     <div>
-      <span class="text-h7">Pergunta {{ selectedQuestion.index + 1 }} de {{ this.questions.length }}</span>
+      <span class="text-h7">Pergunta {{ questionNumber }} de {{ this.questions.length }}</span>
     </div>
     <v-expansion-panels v-model="selectedPanel">
       <v-expansion-panel
@@ -18,7 +18,7 @@
 <script>
 
 import Question from './Question'
-import sessionApi from '@/api/session'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Questions',
@@ -32,21 +32,25 @@ export default {
       default: 'teste-uuid'
     }
   },
-  async mounted () {
-    const { data } = await sessionApi.getById(this.sessionId)
-    this.questions = data.assessment.questions.map((q, index) => ({ ...q, index }))
-    this.selectedQuestion = this.questions[0]
+  computed: {
+    ...mapGetters('session', ['sessions', 'selectedSession']),
+    questions () {
+      return this.selectedSession.assessment.questions
+    },
+    selectedQuestion () {
+      return this.questions[0]
+    }
   },
   methods: {
-    setSelectedQuestion (question) {
+    setSelectedQuestion (question, questionNumber) {
       this.selectedQuestion = question
+      this.questionNumber = questionNumber
     }
   },
   data () {
     return {
       selectedPanel: 0,
-      questions: [],
-      selectedQuestion: null
+      questionNumber: 1
     }
   }
 }

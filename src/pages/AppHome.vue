@@ -23,7 +23,7 @@
 
     <v-main>
       <v-container fluid>
-        <Questions />
+        <Questions v-if="selectedSession" :session-id="selectedSessionId" />
       </v-container>
     </v-main>
 
@@ -44,7 +44,7 @@ export default {
     Questions
   },
   computed: {
-    ...mapGetters('session', ['selectedSession'])
+    ...mapGetters('session', ['selectedSession', 'selectedSessionId'])
   },
   data () {
     return {
