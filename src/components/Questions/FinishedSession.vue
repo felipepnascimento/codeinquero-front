@@ -1,27 +1,20 @@
 <template>
   <div class='assessment-report-wrapper'>
     <div class="header">
-      <p class="text-h2">Prova finalizada!</p>
-      <p class="text-h4">Nota: {{grade}}/100</p>
+      <p class="text-h5">Parabéns! Prova finalizada!</p>
+      <p class="text-h5">Nota: {{grade}}/100</p>
     </div>
-    <p class="text-h5">Já temos um plano de estudo pra você:</p>
-    <ul
-      v-for="(studyPlanItem, i) in studyPlans"
-      :key="i"
-    >
-      <li>
-        <p class="text-h5">Topico: {{studyPlanItem.topic}}</p>
-        <p class="text-h6">{{studyPlanItem.description}}</p>
-        <p class="text-h6">Onde encontrar: {{studyPlanItem.subject.whereFind}}</p>
-      </li>
-    </ul>
+    <p class="text-h7">Já temos um plano de estudo pra você:</p>
+    <StudyPlan :studyPlans="studyPlans"/>
   </div>
 </template>
 <script>
+import StudyPlan from './StudyPlan'
 
 export default {
-  name: 'Questions',
+  name: 'FinishedSession',
   components: {
+    StudyPlan
   },
   props: {
     grade: {
