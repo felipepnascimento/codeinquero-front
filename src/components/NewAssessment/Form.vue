@@ -56,6 +56,7 @@
           color="primary"
           :disabled="invalid"
           type="submit"
+          :loading="loading"
         >
           Gerar Prova
         </v-btn>
@@ -77,14 +78,20 @@ export default {
   },
   methods: {
     ...mapActions('session', ['setSelectedSession', 'getAllSessions', 'setFinishedSession']),
+    setLoading (loading) {
+      this.loading = loading
+    },
     async submit () {
-      sessionApi.post(this.sessionParams()).then(async ({ data }) => {
+      this.setLoading(true)
+      const { status, data } = await sessionApi.post(this.sessionParams())
+      if (status === 200) {
         this.clearParams()
         this.closeModal()
         await this.getAllSessions()
         this.setSelectedSession(data.sessionId)
         this.setFinishedSession(false)
-      })
+      }
+      this.setLoading(false)
     },
     sessionParams () {
       return {
@@ -106,6 +113,7 @@ export default {
   },
   data () {
     return {
+      loading: false,
       subject: '',
       degree: '',
       level: '',
