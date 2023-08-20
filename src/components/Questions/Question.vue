@@ -18,7 +18,7 @@
       </div>
       <div class="actions-section">
         <v-btn outlined @click="showTip()">
-          Quero uma dica
+          Me ajuda!
         </v-btn>
         <v-btn
           :disabled="!selectedAlternative"
