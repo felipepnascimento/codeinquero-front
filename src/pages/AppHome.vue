@@ -1,13 +1,11 @@
 <template>
   <v-app>
     <v-navigation-drawer app color="primary">
-      <v-list-item dark>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Study Bro
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+      <v-list dense nav dark>
+        <v-list-item-title class="text-h6">
+          Study Bro
+        </v-list-item-title>
+      </v-list>
 
       <Sessions />
     </v-navigation-drawer>
