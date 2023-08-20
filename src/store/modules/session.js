@@ -34,6 +34,7 @@ const actions = {
     const selectedSession = state.sessions.find(session => session.id === id)
     commit('setSelectedSession', selectedSession)
     commit('setSelectedSessionId', id)
+    commit('setFinishedSession', false)
   },
   setSessions ({ commit }, sessions) {
     commit('setSessions', sessions)
