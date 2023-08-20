@@ -1,9 +1,6 @@
 // initial state
 const state = () => ({
-  selectedSession: {
-    id: 1,
-    name: 'Prova de Geometria Analitica'
-  },
+  selectedSession: null,
   sessions: [{
     id: 1,
     name: 'Prova de Geometria Analitica'

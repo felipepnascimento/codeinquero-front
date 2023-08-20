@@ -23,9 +23,22 @@
       </v-card-title>
       <v-card-text>
         <v-text-field
+          v-model="subject"
           label="Digite o tema que deseja"
           required
         ></v-text-field>
+        <v-select
+          v-model="degree"
+          :items="degrees"
+          label="Selecionae o grau"
+          solo
+        ></v-select>
+        <v-select
+          v-model="level"
+          :items="levels"
+          label="Selecionae o nível"
+          solo
+        ></v-select>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -56,7 +69,20 @@ export default {
   },
   data () {
     return {
-      dialog: false
+      subject: '',
+      dialog: false,
+      degree: '',
+      degrees: [
+        'Graduação',
+        'Pós Graduação',
+        'Ensino Médio'
+      ],
+      level: '',
+      levels: [
+        'Iniciante',
+        'Intermediário',
+        'Avançado'
+      ]
     }
   }
 }

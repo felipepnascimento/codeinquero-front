@@ -13,7 +13,7 @@
     </v-navigation-drawer>
 
     <v-app-bar app dark color="primary">
-      <v-toolbar-title>
+      <v-toolbar-title v-if="selectedSession">
         {{ selectedSession.name }}
       </v-toolbar-title>
       <v-spacer></v-spacer>
