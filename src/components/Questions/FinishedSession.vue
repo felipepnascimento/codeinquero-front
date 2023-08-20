@@ -1,11 +1,16 @@
 <template>
   <div class='assessment-report-wrapper'>
     <div class="header">
-      <p class="text-h5">Parabéns! Prova finalizada!</p>
+      <p class="text-h5">Prova finalizada!</p>
       <p class="text-h5">Nota: {{grade}}/100</p>
     </div>
-    <p class="text-h7">Já temos um plano de estudo pra você:</p>
-    <StudyPlan :studyPlans="studyPlans"/>
+    <div v-if="studyPlans.length">
+      <p class="text-h7">Já temos um plano de estudo pra você:</p>
+      <StudyPlan :studyPlans="studyPlans"/>
+    </div>
+    <div v-else>
+      <p class="text-h7">Parabéns, você acertou todas as questões, continue assim!</p>
+    </div>
   </div>
 </template>
 <script>
@@ -25,7 +30,11 @@ export default {
       type: Array,
       required: true
     }
+  },
+  mounted () {
+    console.log(this.studyPlans)
   }
+
 }
 </script>
 <style scoped>
