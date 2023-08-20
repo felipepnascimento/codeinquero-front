@@ -59,7 +59,7 @@ export default {
       },
       {
         color: 'indigo',
-        icon: 'none'
+        icon: 'mdi-check-circle'
       }
     ]
   }),
