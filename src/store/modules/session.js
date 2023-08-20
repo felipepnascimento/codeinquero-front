@@ -15,7 +15,9 @@ const getters = {
 const mutations = {
   setSelectedSession (state, selectedSession) {
     state.selectedSession = selectedSession
-    state.selectedSessionId = selectedSession.id
+  },
+  setSelectedSessionId (state, selectedSessionId) {
+    state.selectedSessionId = selectedSessionId
   },
   setSessions (state, sessions) {
     state.sessions = sessions
@@ -26,6 +28,7 @@ const actions = {
   setSelectedSession ({ state, commit }, id) {
     const selectedSession = state.sessions.find(session => session.id === id)
     commit('setSelectedSession', selectedSession)
+    commit('setSelectedSessionId', id)
   },
   setSessions ({ commit }, sessions) {
     commit('setSessions', sessions)
