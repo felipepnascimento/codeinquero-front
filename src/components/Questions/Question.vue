@@ -34,7 +34,8 @@
 
 <style scoped>
 .tip-section {
-  height: 36px;
+  min-height: 36px;
+  margin-bottom: 8px;
 }
 .actions-section {
   display: flex;
