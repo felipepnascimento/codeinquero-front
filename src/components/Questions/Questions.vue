@@ -1,24 +1,8 @@
 <template>
-  <div class='assessment-report-wrapper' v-if="finishedSession">
-    <div class="header">
-      <p class="text-h2">Prova finalizada!</p>
-      <p class="text-h4">Nota: {{this.grade}}/100</p>
-    </div>
-    <p class="text-h5">Já temos um plano de estudo pra você:</p>
-    <ul
-      v-for="(studyPlanItem, i) in this.studyPlans"
-      :key="i"
-    >
-      <li>
-        <p class="text-h5">Topico: {{studyPlanItem.topic}}</p>
-        <p class="text-h6">{{studyPlanItem.description}}</p>
-        <p class="text-h6">Onde encontrar: {{studyPlanItem.subject.whereFind}}</p>
-      </li>
-    </ul>
-  </div>
+  <FinishedSession v-if="finishedSession" :grade="grade" :studyPlans="studyPlans"/>
   <div class="questions-wrapper" v-else-if="questions.length > 0">
     <div>
-      <span class="text-h7">Pergunta {{ questionNumber }} de {{ this.questions.length }}</span>
+      <span class="text-h7">{{ `Pergunta ${questionNumber}` }} de {{ this.questions.length }}</span>
     </div>
     <v-expansion-panels v-model="selectedPanel">
       <v-expansion-panel
@@ -44,13 +28,15 @@
 <script>
 
 import Question from './Question'
+import FinishedSession from './FinishedSession'
 import { mapGetters, mapActions } from 'vuex'
 import sessionApi from '@/api/session'
 
 export default {
   name: 'Questions',
   components: {
-    Question
+    Question,
+    FinishedSession
   },
   props: {
     sessionId: {
@@ -79,13 +65,18 @@ export default {
     },
     async finishSession () {
       this.setLoading(true)
-      const { status, data } = await sessionApi.finish(this.sessionId)
-      if (status === 200) {
-        this.setFinishedSession(true)
-        this.grade = Math.ceil(data.grade)
-        this.studyPlans = data.studyPlans
-      }
-      this.setLoading(false)
+      sessionApi.finish(this.sessionId).then(({ status, data }) => {
+        if (status === 200) {
+          this.setFinishedSession(true)
+          this.grade = Math.ceil(data.grade)
+          this.studyPlans = data.studyPlans
+        }
+      }).catch((error) => {
+        console.log(error)
+        window.alert('Ocorreu um erro inesperado')
+      }).finally(() => {
+        this.setLoading(false)
+      })
     }
   },
   data () {
