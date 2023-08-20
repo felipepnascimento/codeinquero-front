@@ -44,7 +44,7 @@
           @click="submitAnswer()"
           :loading="loading"
         >
-          Submeter resposta
+          Enviar resposta
         </v-btn>
       </div>
     </v-expansion-panel-content>
@@ -115,7 +115,7 @@ export default {
       if (data.correct) {
         this.writeHelperText(`Parabéns, você acertou 🥳🥳🥳 <br/> ${data.reasoning}`)
       } else {
-        this.writeHelperText(`Você errou 🥲<br/> ${data.reasoning}`)
+        this.writeHelperText(`Resposta incorreta 🥲<br/> ${data.reasoning}`)
       }
       this.setLoading(false)
     },

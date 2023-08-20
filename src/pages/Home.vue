@@ -24,13 +24,14 @@
         rounded
         x-large
       >
-      Realizar minha prova
       <v-icon
-        right
+        left
         large
+        style="margin-right: 16px;"
       >
         mdi-rocket-launch
       </v-icon>
+      Realizar minha prova
       </v-btn>
     </div>
   </div>

@@ -1,8 +1,7 @@
 <template>
   <div class='assessment-report-wrapper'>
     <div class="assessment-row">
-      <p class="text-h5">Prova finalizada!</p>
-      <!-- <p class="text-h5">Nota: {{grade}}/100</p> -->
+      <p class="text-h5">Prova finalizada! Sua nota foi:</p>
       <v-progress-circular
         :rotate="-90"
         :size="100"
@@ -10,7 +9,7 @@
         :value="grade"
         :color="gradeColor"
       >
-        <span class="text-h4">{{grade}}</span>
+        <span class="text-h5">{{grade}}</span>
       </v-progress-circular>
     </div>
     <div class="assessment-row" v-if="studyPlans.length">
