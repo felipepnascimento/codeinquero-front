@@ -1,7 +1,18 @@
 <template>
-  <div :class="`question-wrapper ${this.correct && 'correct'}`">
+  <div class="question-wrapper">
     <v-expansion-panel-header>
       {{  index  }}) {{  question.statement  }}
+      <template v-slot:actions>
+        <v-icon v-if="correct" color="teal">
+          mdi-check-circle
+        </v-icon>
+        <v-icon v-else-if="correct === false" color="error">
+          mdi-alert-circle
+        </v-icon>
+        <v-icon v-else>
+          $expand
+        </v-icon>
+      </template>
     </v-expansion-panel-header>
     <v-expansion-panel-content>
       <v-radio-group column>
@@ -13,7 +24,7 @@
           @click="setSelectedAlternative(alternative.id)"
         ></v-radio>
       </v-radio-group>
-      <div class="helper-section">
+      <div :class="`helper-section ${this.helperKind}`">
         {{  helperText  }}
       </div>
       <div class="actions-section">
@@ -34,14 +45,28 @@
 </template>
 
 <style scoped>
-.question-wrapper.correct {
-  background-color: #ceefd0;
-}
-
 .helper-section {
   min-height: 36px;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  padding: 15px;
+  font-family: monospace;
+  visibility: hidden;
 }
+
+.helper-section.answer {
+  visibility: visible;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+.helper-section.tip {
+  visibility: visible;
+  background: #343541;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  color: #ffffff;
+}
+
 .actions-section {
   display: flex;
   justify-content: space-between;
@@ -70,15 +95,16 @@ export default {
   methods: {
     writeHelperText (tip) {
       this.helperText = ''
-      const words = tip.split(' ')
+      const words = tip.split('')
       words.forEach((word, i) => {
         setTimeout(() => {
-          this.helperText = (this.helperText || '') + ' ' + word
-        }, i * 150)
+          this.helperText = (this.helperText || '') + '' + word
+        }, i * 30)
       })
     },
     showTip () {
       const activeTipIndex = this.activeTipIndex !== null ? this.activeTipIndex + 1 : 0
+      this.helperKind = 'tip'
       if (!this.question.tips[activeTipIndex]) {
         this.helperText = 'Acabaram as dicas.'
       } else {
@@ -93,10 +119,11 @@ export default {
       this.setLoading(true)
       const { data } = await questionApi.submitAnswer(this.sessionId, this.question.id, this.selectedAlternative)
       this.correct = data.correct
+      this.helperKind = 'answer'
       if (data.correct) {
         this.writeHelperText(`Parabéns, você acertou! Raciocínio: ${data.reasoning}`)
       } else {
-        this.writeHelperText(`Você error. Entenda o raciocínio: \n ${data.reasoning}`)
+        this.writeHelperText(`Você errou. Entenda o raciocínio: \n ${data.reasoning}`)
       }
       this.setLoading(false)
     },
@@ -108,6 +135,7 @@ export default {
     return {
       activeTipIndex: null,
       helperText: '',
+      helperKind: null,
       selectedAlternative: null,
       correct: null,
       loading: false
