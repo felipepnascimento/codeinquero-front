@@ -24,6 +24,7 @@
           :disabled="!selectedAlternative"
           color="primary"
           @click="submitAnswer()"
+          :loading="loading"
         >
           Submeter resposta
         </v-btn>
@@ -87,7 +88,11 @@ export default {
         this.writeHelperText(this.question.tips[activeTipIndex].description)
       }
     },
+    setLoading (loading) {
+      this.loading = loading
+    },
     async submitAnswer () {
+      this.setLoading(true)
       const { data } = await questionApi.submitAnswer(this.sessionId, this.question.id, this.selectedAlternative)
       this.correct = data.correct
       if (data.correct) {
@@ -95,6 +100,7 @@ export default {
       } else {
         this.writeHelperText(`Você error. Entenda o raciocínio: \n ${data.reasoning}`)
       }
+      this.setLoading(false)
     },
     setSelectedAlternative (alternativeId) {
       this.selectedAlternative = alternativeId
@@ -105,7 +111,8 @@ export default {
       activeTipIndex: null,
       helperText: '',
       selectedAlternative: null,
-      correct: null
+      correct: null,
+      loading: false
     }
   }
 }

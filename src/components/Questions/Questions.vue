@@ -31,8 +31,9 @@
     </v-expansion-panels>
     <div class='submit-section'>
       <v-btn
-          color="primary"
-          @click="finishSession()"
+        color="primary"
+        @click="finishSession()"
+        :loading="loading"
       >
         Finalizar prova
       </v-btn>
@@ -73,13 +74,18 @@ export default {
       this.selectedQuestion = question
       this.questionNumber = questionNumber
     },
+    setLoading (loading) {
+      this.loading = loading
+    },
     async finishSession () {
+      this.setLoading(true)
       const { status, data } = await sessionApi.finish(this.sessionId)
       if (status === 200) {
         this.setFinishedSession(true)
         this.grade = Math.ceil(data.grade)
         this.studyPlans = data.studyPlans
       }
+      this.setLoading(false)
     }
   },
   data () {
@@ -88,7 +94,8 @@ export default {
       questionNumber: 1,
       finished: false,
       grade: null,
-      studyPlans: []
+      studyPlans: [],
+      loading: false
     }
   }
 }
