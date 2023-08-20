@@ -1,6 +1,8 @@
 const path = require('path')
 
 module.exports = {
+  verbose: true,
+  testURL: 'http://localhost/',
   rootDir: path.resolve(__dirname, '../../'),
   moduleFileExtensions: [
     'js',
@@ -8,7 +10,8 @@ module.exports = {
     'vue'
   ],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    'axios': 'axios/dist/node/axios.cjs'
   },
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
