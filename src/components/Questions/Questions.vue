@@ -9,7 +9,7 @@
         :key="question.name"
         @click="setSelectedQuestion(question, i + 1)"
       >
-        <Question :question="question" :index="i + 1" />
+        <Question :question="question" :index="i + 1" :session-id="sessionId" />
       </v-expansion-panel>
     </v-expansion-panels>
   </div>
@@ -25,8 +25,15 @@ export default {
   components: {
     Question
   },
+  props: {
+    sessionId: {
+      type: String,
+      required: false,
+      default: 'teste-uuid'
+    }
+  },
   async mounted () {
-    const { data } = await sessionApi.getById('teste-uuid')
+    const { data } = await sessionApi.getById(this.sessionId)
     this.questions = data.assessment.questions.map((q, index) => ({ ...q, index }))
     this.selectedQuestion = this.questions[0]
   },
