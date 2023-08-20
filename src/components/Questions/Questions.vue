@@ -1,15 +1,15 @@
 <template>
   <div class="questions-wrapper">
     <div>
-      <span class="text-h7">{{ selectedQuestion.name }} de 10</span>
+      <span class="text-h7">Pergunta {{ selectedQuestion.index }} de 10</span>
     </div>
     <v-expansion-panels v-model="selectedPanel">
       <v-expansion-panel
         v-for="(question, i) in questions"
         :key="question.name"
-        @click="setSelectedQuestion(question, i)"
+        @click="setSelectedQuestion(question, i + 1)"
       >
-        <Question :question="question" />
+        <Question :question="question" :index="i + 1" />
       </v-expansion-panel>
     </v-expansion-panels>
   </div>
@@ -30,7 +30,8 @@ export default {
   methods: {
     setSelectedQuestion (question, index) {
       this.selectedQuestion = {
-        name: question.name
+        id: question.id,
+        index
       }
     }
   },
@@ -38,48 +39,40 @@ export default {
     return {
       selectedPanel: 0,
       questions: [{
-        name: 'Pergunta 1',
-        question: 'Qual é o maior país do mundo?'
+        id: 'teste-uuid1',
+        statement: 'Qual é a equação da reta que passa pelos pontos A(2, 3) e B(5, 7)?',
+        alternatives: [
+          {id: 'teste-uuid1', description: 'a) y = 2x + 1'},
+          {id: 'teste-uuid2', description: 'b) y = 2x + 1'},
+          {id: 'teste-uuid3', description: 'c) y = 2x + 1'},
+          {id: 'teste-uuid4', description: 'd) y = 2x + 1'},
+          {id: 'teste-uuid5', description: 'e) y = 2x + 1'}
+        ],
+        tips: [
+          {id: 'teste-uuid1', description: 'Lembre-se da fórmula da equação da reta: y = mx + b.'},
+          {id: 'teste-uuid2', description: 'Lembre-se da fórmula da equação da reta: y = mx + b.'},
+          {id: 'teste-uuid3', description: 'Lembre-se da fórmula da equação da reta: y = mx + b.'}
+        ],
+        correctAlternative: 'teste-uuid',
+        reasoning: '...'
       },
       {
-        name: 'Pergunta 2',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 3',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 4',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 5',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 6',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 7',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 8',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 9',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 10',
-        question: 'Qual é o maior país do mundo?'
+        id: 'teste-uuid2',
+        statement: 'Qual é a equação da reta que passa pelos pontos A(2, 3) e B(5, 7)?',
+        alternatives: [
+          {id: 'teste-uuid1', description: 'a) y = 2x + 1'},
+          {id: 'teste-uuid2', description: 'b) y = 2x + 1'},
+          {id: 'teste-uuid3', description: 'c) y = 2x + 1'},
+          {id: 'teste-uuid4', description: 'd) y = 2x + 1'},
+          {id: 'teste-uuid5', description: 'e) y = 2x + 1'}
+        ],
+        tips: [{id: 'teste-uuid1', description: 'Lembre-se da fórmula da equação da reta: y = mx + b.'}],
+        correctAlternative: 'teste-uuid',
+        reasoning: '...'
       }],
       selectedQuestion: {
-        name: 'Pergunta 1',
-        value: 10
+        id: 'teste-uuid1',
+        index: 1
       }
     }
   }
