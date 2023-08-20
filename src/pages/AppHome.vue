@@ -9,7 +9,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <Assessments />
+      <Sessions />
     </v-navigation-drawer>
 
     <v-app-bar app dark color="primary">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Assessments from '@/components/Assessments'
+import Sessions from '@/components/Sessions'
 import NewAssessmentModal from '@/components/NewAssessmentModal'
 import Questions from '@/components/Questions/Questions'
 import { mapGetters } from 'vuex'
@@ -39,7 +39,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'AppHome',
   components: {
-    Assessments,
+    Sessions,
     NewAssessmentModal,
     Questions
   },
