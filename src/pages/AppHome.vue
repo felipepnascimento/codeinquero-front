@@ -2,7 +2,7 @@
   <v-app>
     <v-navigation-drawer app color="primary">
       <v-list dense nav dark>
-        <v-list-item-title class="text-h6">
+        <v-list-item-title @click="navigate()" class="text-h6 list-item-title">
           Study Bro
         </v-list-item-title>
       </v-list>
@@ -43,6 +43,16 @@ export default {
   },
   computed: {
     ...mapGetters('session', ['selectedSession', 'selectedSessionId'])
+  },
+  methods: {
+    navigate () {
+      this.$router.push('/')
+    }
   }
 }
 </script>
+<style>
+.list-item-title {
+  cursor: pointer
+}
+</style>
