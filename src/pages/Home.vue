@@ -5,7 +5,7 @@
         {{ this.h1text }}
       </h1>
       <h1 v-if="this.blinking" class="blinking">
-        |
+        _
       </h1>
     </div>
     <div style="display:flex; direction:row">
@@ -13,7 +13,7 @@
         {{ this.h2text }}
       </h2>
       <h2 v-if="this.blinking2" class="blinking2">
-        |
+        _
       </h2>
     </div>
     <div class="display:flex; direction:row; margin-bottom: 48px">
@@ -64,6 +64,7 @@ export default {
           this.h1text = (this.h1text || '') + '' + word
           if (i === words.length - 1) {
             clearInterval(intervalId)
+            this.blinking = false
             setTimeout(() => {
               this.writeH2Animated('Vamos começar?')
             }, 1500)

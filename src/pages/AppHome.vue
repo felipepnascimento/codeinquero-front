@@ -20,7 +20,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container fluid>
+      <v-container>
         <Questions v-if="selectedSession" :session-id="selectedSessionId" />
       </v-container>
     </v-main>
