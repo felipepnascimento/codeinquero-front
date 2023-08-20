@@ -2,17 +2,20 @@ import sessionApi from '@/api/session'
 
 const state = () => ({
   selectedSession: null,
+  selectedSessionId: '',
   sessions: []
 })
 
 const getters = {
   selectedSession: ({ selectedSession }) => selectedSession,
+  selectedSessionId: ({ selectedSessionId }) => selectedSessionId,
   sessions: ({ sessions }) => sessions
 }
 
 const mutations = {
   setSelectedSession (state, selectedSession) {
     state.selectedSession = selectedSession
+    state.selectedSessionId = selectedSession.id
   },
   setSessions (state, sessions) {
     state.sessions = sessions
