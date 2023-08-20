@@ -74,8 +74,6 @@ export default {
   props: {
     closeModal: Function
   },
-  components: {
-  },
   methods: {
     ...mapActions('session', ['setSelectedSession', 'getAllSessions', 'setFinishedSession']),
     setLoading (loading) {
