@@ -1,7 +1,8 @@
-# codeinquero-front
+# Study Bro
 
-> A Vue.js project
+> Uma plataforma parceira de estudos para te ajudar a aprimorar seus conhecimentos em diversas áreas de ensino.
 
+![Alt text](image.png)
 ## Build Setup
 
 ``` bash
