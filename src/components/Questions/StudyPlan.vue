@@ -17,7 +17,7 @@
         <v-card-title class="text-h6">
           {{ studyPlan.topic }}
         </v-card-title>
-        <v-card-text class="white text--primary">
+        <v-card-text class="white text--primary card-content">
           <p class="text-h6">Contexto:</p>
           <p class="text-h7">{{ studyPlan.description }}</p>
           <p class="text-h6">Onde encontrar:</p>
@@ -83,6 +83,10 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.card-content {
+  padding-top: 8px;;
 }
 
 </style>
