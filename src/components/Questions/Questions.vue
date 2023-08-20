@@ -1,15 +1,15 @@
 <template>
-  <div class="questions-wrapper">
+  <div class="questions-wrapper" v-if="this.questions.length > 0">
     <div>
-      <span class="text-h7">{{ selectedQuestion.name }} de 10</span>
+      <span class="text-h7">Pergunta {{ selectedQuestion.index + 1 }} de {{ this.questions.length }}</span>
     </div>
     <v-expansion-panels v-model="selectedPanel">
       <v-expansion-panel
         v-for="(question, i) in questions"
         :key="question.name"
-        @click="setSelectedQuestion(question, i)"
+        @click="setSelectedQuestion(question, i + 1)"
       >
-        <Question :question="question" />
+        <Question :question="question" :index="i + 1" />
       </v-expansion-panel>
     </v-expansion-panels>
   </div>
@@ -18,69 +18,28 @@
 <script>
 
 import Question from './Question'
+import sessionApi from '@/api/session'
 
 export default {
   name: 'Questions',
   components: {
     Question
   },
-  computed: {
-
+  async mounted () {
+    const { data } = await sessionApi.getById('teste-uuid')
+    this.questions = data.assessment.questions.map((q, index) => ({ ...q, index }))
+    this.selectedQuestion = this.questions[0]
   },
   methods: {
-    setSelectedQuestion (question, index) {
-      this.selectedQuestion = {
-        name: question.name
-      }
+    setSelectedQuestion (question) {
+      this.selectedQuestion = question
     }
   },
   data () {
     return {
       selectedPanel: 0,
-      questions: [{
-        name: 'Pergunta 1',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 2',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 3',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 4',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 5',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 6',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 7',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 8',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 9',
-        question: 'Qual é o maior país do mundo?'
-      },
-      {
-        name: 'Pergunta 10',
-        question: 'Qual é o maior país do mundo?'
-      }],
-      selectedQuestion: {
-        name: 'Pergunta 1',
-        value: 10
-      }
+      questions: [],
+      selectedQuestion: null
     }
   }
 }
