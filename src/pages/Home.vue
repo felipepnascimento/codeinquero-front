@@ -1,6 +1,6 @@
-<template>
+<template dark>
   <div class="home">
-    <div style="display:flex; direction:row; margin-bottom: 16px">
+    <div class="home-row">
       <h1 class="header">
         {{ this.h1text }}
       </h1>
@@ -8,7 +8,7 @@
         _
       </h1>
     </div>
-    <div style="display:flex; direction:row">
+    <div class="home-row">
       <h2 class="header2">
         {{ this.h2text }}
       </h2>
@@ -16,14 +16,22 @@
         _
       </h2>
     </div>
-    <div class="display:flex; direction:row; margin-bottom: 48px">
-      <button
-        class="button"
+    <div>
+      <v-btn
         v-if="this.enableButton"
         @click="navigate"
+        elevation="5"
+        rounded
+        x-large
       >
-        Começar
-      </button>
+      Realizar minha prova
+      <v-icon
+        right
+        large
+      >
+        mdi-rocket-launch
+      </v-icon>
+      </v-btn>
     </div>
   </div>
 </template>
@@ -37,7 +45,7 @@ export default {
     NewAssessmentModal
   },
   mounted () {
-    this.writeH1Animated('Welcome to Study Bro!')
+    this.writeH1Animated('Bem vindo ao Study Bro!')
   },
   data () {
     return {
@@ -107,38 +115,29 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
+.home-row {
+  display:flex;
+  direction:row;
+  margin-bottom: 24px
+}
 .header {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 48px;
+  font-size: 64px;
   color: #fff;
 }
-
 .blinking {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 48px;
+  font-size: 64px;
   color: #cec6c6;
 }
-
 .header2 {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 36px;
+  font-size: 48px;
   color: #fff;
 }
-
 .blinking2 {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 36px;
+  font-size: 48px;
   color: #cec6c6;
-}
-
-.button {
-  width: 600px;
-  background: white;
-  height: 38px;
-  border-radius: 5px;
-  margin-top: 48px;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 800;
 }
 </style>
