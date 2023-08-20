@@ -2,9 +2,8 @@
   <div class="questions-wrapper">
     <div>
       <span class="text-h7">{{ selectedQuestion.name }} de 10</span>
-      <v-progress-linear :value="selectedQuestion.value" color="purple" background-color="grey"></v-progress-linear>
     </div>
-    <v-expansion-panels>
+    <v-expansion-panels v-model="selectedPanel">
       <v-expansion-panel
         v-for="(question, i) in questions"
         :key="question.name"
@@ -31,13 +30,13 @@ export default {
   methods: {
     setSelectedQuestion (question, index) {
       this.selectedQuestion = {
-        name: question.name,
-        value: (index + 1) * 10
+        name: question.name
       }
     }
   },
   data () {
     return {
+      selectedPanel: 0,
       questions: [{
         name: 'Pergunta 1',
         question: 'Qual é o maior país do mundo?'
