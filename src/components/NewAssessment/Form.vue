@@ -6,12 +6,13 @@
     <form @submit.prevent="submit">
       <v-card-text>
         <validation-provider
+          v-slot="{ errors }"
           name="subject"
           rules="required"
         >
           <v-text-field
             v-model="subject"
-            error-messages="O campo tema é obrigatorio"
+            :error-messages="errors"
             label="Digite o tema que deseja"
             required
           >
@@ -19,13 +20,14 @@
         </validation-provider>
 
         <validation-provider
+          v-slot="{ errors }"
           name="degree"
           rules="required"
         >
           <v-select
             v-model="degree"
             :items="degrees"
-            error-messages="O campo grau é obrigatorio"
+            :error-messages="errors"
             label="Selecionae o grau"
             solo
             required
@@ -34,13 +36,14 @@
         </validation-provider>
 
         <validation-provider
+          v-slot="{ errors }"
           name="level"
           rules="required"
         >
           <v-select
             v-model="level"
             :items="levels"
-            error-messages="O campo nível é obrigatorio"
+            :error-messages="errors"
             label="Selecionae o nível"
             solo
           >
@@ -63,6 +66,7 @@
 
 <script>
 import sessionApi from '@/api/session'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'NewAssessmentModal',
@@ -72,10 +76,14 @@ export default {
   components: {
   },
   methods: {
+    ...mapActions('session', ['setSelectedSession', 'getAllSessions']),
     async submit () {
-      await sessionApi.post(this.sessionParams())
-      this.clearParams()
-      this.closeModal()
+      sessionApi.post(this.sessionParams()).then(async ({ data }) => {
+        this.clearParams()
+        this.closeModal()
+        await this.getAllSessions()
+        this.setSelectedSession(data.sessionId)
+      })
     },
     sessionParams () {
       return {

@@ -1,16 +1,13 @@
-// initial state
 const state = () => ({
   selectedAssessment: null,
   assessments: []
 })
 
-// getters
 const getters = {
   selectedAssessment: ({ selectedAssessment }) => selectedAssessment,
   assessments: ({ assessments }) => assessments
 }
 
-// mutations
 const mutations = {
   setSelectedAssessment (state, selectedAssessment) {
     state.selectedAssessment = selectedAssessment
@@ -20,7 +17,6 @@ const mutations = {
   }
 }
 
-// actions
 const actions = {
   setSelectedAssessment ({ commit }, selectedAssessment) {
     commit('setSelectedAssessment', selectedAssessment)
