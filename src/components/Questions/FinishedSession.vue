@@ -30,11 +30,7 @@ export default {
       type: Array,
       required: true
     }
-  },
-  mounted () {
-    console.log(this.studyPlans)
   }
-
 }
 </script>
 <style scoped>

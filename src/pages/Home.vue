@@ -32,7 +32,7 @@
 import NewAssessmentModal from '@/components/NewAssessment/Modal'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Home',
   components: {
     NewAssessmentModal
   },

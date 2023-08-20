@@ -67,8 +67,6 @@ export default {
       required: false
     }
   },
-  components: {
-  },
   methods: {
     writeHelperText (tip) {
       this.helperText = ''
@@ -117,5 +115,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-</style>

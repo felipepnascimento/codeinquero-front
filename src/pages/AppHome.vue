@@ -43,10 +43,6 @@ export default {
   },
   computed: {
     ...mapGetters('session', ['selectedSession', 'selectedSessionId'])
-  },
-  data () {
-    return {
-    }
   }
 }
 </script>
