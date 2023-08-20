@@ -19,7 +19,7 @@
     </template>
     <v-card>
       <v-card-title>
-        <span class="text-h5">Escolha o tema da sua prova</span>
+        <span class="text-h5">Preencha as informações para começar a prova</span>
       </v-card-title>
       <Form :close-modal="closeModal" />
     </v-card>
