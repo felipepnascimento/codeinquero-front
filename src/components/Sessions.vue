@@ -9,7 +9,7 @@
     </v-list-item-title>
     <v-list-item
       v-for="session in sessions"
-      :key="session.sessionId"
+      :key="session.id"
       link
       @click="setSelectedSession(session)"
     >
