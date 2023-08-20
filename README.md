@@ -6,6 +6,7 @@
 
 ## Requisitos
 Node JS (v14.19.3)
+
 VueJS (v2.5.2)
 ## Setup
 
