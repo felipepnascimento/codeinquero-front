@@ -14,12 +14,11 @@ module.exports = {
     'axios': 'axios/dist/node/axios.cjs'
   },
   transform: {
-    '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
-    '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest'
+    '^.+\\.vue$': 'vue-jest',
+    '^.+\\.js$': 'babel-jest'
   },
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
   setupFiles: ['<rootDir>/test/unit/setup'],
-  mapCoverage: true,
   coverageDirectory: '<rootDir>/test/unit/coverage',
   collectCoverageFrom: [
     'src/**/*.{js,vue}',
