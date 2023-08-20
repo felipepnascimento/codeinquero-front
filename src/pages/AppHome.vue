@@ -32,7 +32,7 @@
 
 <script>
 import Sessions from '@/components/Sessions'
-import NewAssessmentModal from '@/components/NewAssessmentModal'
+import NewAssessmentModal from '@/components/NewAssessment/Modal'
 import Questions from '@/components/Questions/Questions'
 import { mapGetters } from 'vuex'
 
