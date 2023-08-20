@@ -11,6 +11,7 @@
       v-for="session in sessions"
       :key="session.id"
       link
+      @click="setSelectedSession(session)"
     >
       <v-list-item-icon>
         <v-icon>mdi-history</v-icon>
@@ -24,12 +25,15 @@
   </v-list>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Sessions',
   computed: {
     ...mapGetters('session', ['sessions'])
+  },
+  methods: {
+    ...mapActions('session', ['setSelectedSession'])
   }
 }
 </script>

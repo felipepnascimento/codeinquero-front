@@ -14,7 +14,7 @@
 
     <v-app-bar app dark color="primary">
       <v-toolbar-title>
-        Prova de Matemática Aplicada
+        {{ selectedSession.name }}
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -44,7 +44,7 @@ export default {
     Questions
   },
   computed: {
-    ...mapGetters('assessment', ['assessments'])
+    ...mapGetters('session', ['selectedSession'])
   },
   data () {
     return {
