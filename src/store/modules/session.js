@@ -1,22 +1,15 @@
-// initial state
+import sessionApi from '@/api/session'
+
 const state = () => ({
   selectedSession: null,
-  sessions: [{
-    id: 1,
-    name: 'Prova de Geometria Analitica'
-  }, {
-    id: 2,
-    name: 'Prova de Português'
-  }]
+  sessions: []
 })
 
-// getters
 const getters = {
   selectedSession: ({ selectedSession }) => selectedSession,
   sessions: ({ sessions }) => sessions
 }
 
-// mutations
 const mutations = {
   setSelectedSession (state, selectedSession) {
     state.selectedSession = selectedSession
@@ -26,12 +19,17 @@ const mutations = {
   }
 }
 
-// actions
 const actions = {
   setSelectedSession ({ commit }, selectedSession) {
     commit('setSelectedSession', selectedSession)
   },
   setSessions ({ commit }, sessions) {
+    commit('setSessions', sessions)
+  },
+  async getAllSessions ({ commit }) {
+    const email = 'breno.pereira@quero.com'
+    const { data } = await sessionApi.get(email)
+    const { sessions } = data
     commit('setSessions', sessions)
   }
 }
