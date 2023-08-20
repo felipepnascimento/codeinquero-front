@@ -13,7 +13,7 @@
     </v-navigation-drawer>
 
     <v-app-bar app dark color="primary">
-      <v-toolbar-title >
+      <v-toolbar-title>
         Prova de Matemática Aplicada
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -44,7 +44,7 @@ export default {
     Questions
   },
   computed: {
-    ...mapGetters('assessment', ['assessment'])
+    ...mapGetters('assessment', ['assessments'])
   },
   data () {
     return {
