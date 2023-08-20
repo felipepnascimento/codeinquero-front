@@ -1,7 +1,18 @@
 <template>
-  <div :class="`question-wrapper ${this.correct && 'correct'}`">
+  <div class="question-wrapper">
     <v-expansion-panel-header>
       {{  index  }}) {{  question.statement  }}
+      <template v-slot:actions>
+        <v-icon v-if="correct" color="teal">
+          mdi-check-circle
+        </v-icon>
+        <v-icon v-else-if="correct === false" color="error">
+          mdi-alert-circle
+        </v-icon>
+        <v-icon v-else>
+          $expand
+        </v-icon>
+      </template>
     </v-expansion-panel-header>
     <v-expansion-panel-content>
       <v-radio-group column>
@@ -34,10 +45,6 @@
 </template>
 
 <style scoped>
-.question-wrapper.correct {
-  background-color: #ceefd0;
-}
-
 .helper-section {
   min-height: 36px;
   margin-bottom: 16px;
