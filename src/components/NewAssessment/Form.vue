@@ -76,13 +76,14 @@ export default {
   components: {
   },
   methods: {
-    ...mapActions('session', ['setSelectedSession', 'getAllSessions']),
+    ...mapActions('session', ['setSelectedSession', 'getAllSessions', 'setFinishedSession']),
     async submit () {
       sessionApi.post(this.sessionParams()).then(async ({ data }) => {
         this.clearParams()
         this.closeModal()
         await this.getAllSessions()
         this.setSelectedSession(data.sessionId)
+        this.setFinishedSession(false)
       })
     },
     sessionParams () {

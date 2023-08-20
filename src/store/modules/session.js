@@ -3,13 +3,15 @@ import sessionApi from '@/api/session'
 const state = () => ({
   selectedSession: null,
   selectedSessionId: '',
-  sessions: []
+  sessions: [],
+  finishedSession: false
 })
 
 const getters = {
   selectedSession: ({ selectedSession }) => selectedSession,
   selectedSessionId: ({ selectedSessionId }) => selectedSessionId,
-  sessions: ({ sessions }) => sessions
+  sessions: ({ sessions }) => sessions,
+  finishedSession: ({ finishedSession }) => finishedSession
 }
 
 const mutations = {
@@ -21,6 +23,9 @@ const mutations = {
   },
   setSessions (state, sessions) {
     state.sessions = sessions
+  },
+  setFinishedSession (state, finishedSession) {
+    state.finishedSession = finishedSession
   }
 }
 
@@ -38,6 +43,9 @@ const actions = {
     const { data } = await sessionApi.get(email)
     const { sessions } = data
     commit('setSessions', sessions)
+  },
+  setFinishedSession ({ commit }, finishedSession) {
+    commit('setFinishedSession', finishedSession)
   }
 }
 

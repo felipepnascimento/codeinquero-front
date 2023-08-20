@@ -1,5 +1,5 @@
 <template>
-  <div class='assessment-report-wrapper' v-if="this.finished">
+  <div class='assessment-report-wrapper' v-if="finishedSession">
     <div class="header">
       <p class="text-h2">Prova finalizada!</p>
       <p class="text-h4">Nota: {{this.grade}}/100</p>
@@ -16,7 +16,7 @@
       </li>
     </ul>
   </div>
-  <div class="questions-wrapper" v-else-if="this.questions.length > 0">
+  <div class="questions-wrapper" v-else-if="questions.length > 0">
     <div>
       <span class="text-h7">Pergunta {{ questionNumber }} de {{ this.questions.length }}</span>
     </div>
@@ -43,7 +43,7 @@
 <script>
 
 import Question from './Question'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import sessionApi from '@/api/session'
 
 export default {
@@ -59,7 +59,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('session', ['sessions', 'selectedSession']),
+    ...mapGetters('session', ['sessions', 'selectedSession', 'finishedSession']),
     questions () {
       return this.selectedSession.assessment.questions
     },
@@ -68,6 +68,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('session', ['setFinishedSession']),
     setSelectedQuestion (question, questionNumber) {
       this.selectedQuestion = question
       this.questionNumber = questionNumber
@@ -75,7 +76,7 @@ export default {
     async finishSession () {
       const { status, data } = await sessionApi.finish(this.sessionId)
       if (status === 200) {
-        this.finished = true
+        this.setFinishedSession(true)
         this.grade = Math.ceil(data.grade)
         this.studyPlans = data.studyPlans
       }
